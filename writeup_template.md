@@ -9,9 +9,7 @@ The goals / steps of this project are the following:
 
 [//]: # (Image References)
 [image1]: ./report_images/car_notcar.jpg
-[image2]: ./report_images/car_hog0.jpg
 [image3]: ./report_images/car_hog1.jpg
-[image6]: ./report_images/car_nhog0.jpg
 [image7]: ./report_images/car_nhog1.jpg
 [image10]: ./report_images/400_500_1.jpg
 [image11]: ./report_images/400_550_1_3.jpg
@@ -48,12 +46,10 @@ I then explored different color spaces and different `skimage.hog()` parameters 
 
 Here is an example using the `YUV` color space and HOG parameters of `orientations=9`, `pixels_per_cell=(8, 8)` and `cells_per_block=(2, 2)` for a random car image from the provided datased:
 
-![alt text][image2]
 ![alt text][image3]
 
 The same for a non-car image:
 
-![alt text][image6]
 ![alt text][image7]
 
 #### 2. Explain how you settled on your final choice of HOG parameters.
