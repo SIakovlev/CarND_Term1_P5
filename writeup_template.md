@@ -90,10 +90,6 @@ Because of the effect of perspective the car appears small near the middle of th
 
 Ultimately I searched on two scales using YUV 3-channel HOG features plus spatially binned color and histograms of color in the feature vector, which provided a nice result. Here are some images that show how the pipeline works:
 
-![alt text][image14]
-![alt text][image15]
-![alt text][image16]
-![alt text][image17]
 ---
 
 ### Video Implementation
@@ -104,9 +100,14 @@ Here's a [link to my video result](./project_video.mp4)
 
 #### 2. Describe how (and identify where in your code) you implemented some kind of filter for false positives and some method for combining overlapping bounding boxes.
 
-I recorded the positions of positive detections in each frame of the video.  From the positive detections I created a heatmap and then thresholded that map to identify vehicle positions.  I then used `scipy.ndimage.measurements.label()` to identify individual blobs in the heatmap.  I then assumed each blob corresponded to a vehicle.  I constructed bounding boxes to cover the area of each blob detected.  
+I recorded the positions of positive detections in each frame of the video.  From the positive detections I created a heatmap and then thresholded that map to identify vehicle positions.  I then used `scipy.ndimage.measurements.label()` to identify individual blobs in the heatmap. Assuming that each blob corresponded to a vehicle, I constructed bounding boxes to cover the area of each blob detected.  
 
 Here's an example result showing the heatmap from a series of frames of video, the result of `scipy.ndimage.measurements.label()` and the bounding boxes then overlaid on the last frame of video:
+
+![alt text][image14]
+![alt text][image15]
+![alt text][image16]
+![alt text][image17]
 
 ---
 
