@@ -99,9 +99,15 @@ Here's a [link to my video result](./project_video.mp4)
 
 #### 2. Describe how (and identify where in your code) you implemented some kind of filter for false positives and some method for combining overlapping bounding boxes.
 
-I recorded the positions of positive detections in each frame of the video.  From the positive detections I created a heatmap and then thresholded that map to identify vehicle positions.  I then used `scipy.ndimage.measurements.label()` to identify individual blobs in the heatmap. Assuming that each blob corresponded to a vehicle, I constructed bounding boxes to cover the area of each blob detected.  
+I recorded the positions of positive detections in each frame of the video.  From the positive detections I created a heatmap and then thresholded that map to identify vehicle positions.  I then used `scipy.ndimage.measurements.label()` to identify individual blobs in the heatmap. Assuming that each blob corresponded to a vehicle, I constructed bounding boxes to cover the area of each blob detected. The code with detections is in the function `find_cars_v2()`, and filtering false positives is in `add_heat()` and `apply_threshold()` which is the part of the function `find_cars_v2()`. 
 
-Here's an example result showing the heatmap from a series of frames of video, the result of `scipy.ndimage.measurements.label()` and the bounding boxes then overlaid on the last frame of video:
+In addition I do [exponential smoothing](https://www.wikiwand.com/en/Exponential_smoothing) of a heatmap between frames. This helps to make box movements more smooth:
+
+```python
+  heat_m = np.uint8(0.7*add_heat(heat, list(boxes)) + (1-0.7)*heat_m)
+```
+
+Here's an example result showing how the pipeline works. Left image is the SVM detection result, then its heatmap, the result of `scipy.ndimage.measurements.label()` and the bounding boxes then overlaid on the last picture:
 
 ![alt text][image14]
 ![alt text][image15]
