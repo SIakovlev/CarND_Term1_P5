@@ -48,7 +48,6 @@ I started by reading in all the `vehicle` and `non-vehicle` images.  Here is an 
 
 ![alt text][image1]
 
-
 I then explored different color spaces and different `skimage.hog()` parameters (`orientations`, `pixels_per_cell`, and `cells_per_block`).  I grabbed random images from each of the two classes and displayed them to get a feel for what the `skimage.hog()` output looks like.
 
 Here is an example using the `YUV` color space and HOG parameters of `orientations=9`, `pixels_per_cell=(8, 8)` and `cells_per_block=(2, 2)` for a random car image from the provided datased:
@@ -65,20 +64,22 @@ The same for a non-car image:
 ![alt text][image8]
 ![alt text][image9]
 
-
 #### 2. Explain how you settled on your final choice of HOG parameters.
 
-I tried various combinations of parameters and...
+The configuration above did reasonably well for classification, so I have decided to choose it. The intuition behind this particular choice is the following:
+
+* The parameter `orientations` shouldn't be very large which means we tend to describe object of boxed shape with angles varying not more than +-40 degrees (360/9 = 40). Cars satisfy this property.
+* The other two parameters (`pixels_per_cell=(8, 8)` and `cells_per_block=(2, 2)`) is a good choice for 64x64 image allowing to get reasonably enough amount of features from a given picture. I will provide a very simplified explanation. The car shape changes about 1-3 times (if we look from behind or from any side) in horisontal direction and about 1-2 times in vertical direction. This means that for good description of a car shape we need about 2-3 boxes per one shape change in order to describe these changes with reasonable amount of details. 
 
 #### 3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
 
-I trained a Linear SVM classifier using HOG features and color features and got 98.9% on the test set, which I think should be enough for reliable car detection in a video stream.
+I trained a Linear SVM classifier using HOG features and color features and got 99.6% on the test set (section "SVM Classifier" in the Jupyter Notebook file), which was enough for reliable car detection in a video stream. The disadvantage though is the computational complexity, i.e. in order to classify if the image belongs to one of two classes, the classifier should analyse its histogram, pixels and hog features.  
 
 ### Sliding Window Search
 
 #### 1. Describe how (and identify where in your code) you implemented a sliding window search.  How did you decide what scales to search and how much to overlap windows?
 
-I searched in the following four regions according to the perspective transform of the camera image:
+Because of the effect of perspective the car appears small near the middle of the image and large near its edges. Therefore I searched in the following four regions trying to take this into account:
 
 ![alt text][image10]
 ![alt text][image11]
@@ -87,7 +88,7 @@ I searched in the following four regions according to the perspective transform 
 
 #### 2. Show some examples of test images to demonstrate how your pipeline is working.  What did you do to optimize the performance of your classifier?
 
-Ultimately I searched on two scales using YCrCb 3-channel HOG features plus spatially binned color and histograms of color in the feature vector, which provided a nice result.  Here are some example images:
+Ultimately I searched on two scales using YUV 3-channel HOG features plus spatially binned color and histograms of color in the feature vector, which provided a nice result. Here are some images that show how the pipeline works:
 
 ![alt text][image14]
 ![alt text][image15]
@@ -107,23 +108,18 @@ I recorded the positions of positive detections in each frame of the video.  Fro
 
 Here's an example result showing the heatmap from a series of frames of video, the result of `scipy.ndimage.measurements.label()` and the bounding boxes then overlaid on the last frame of video:
 
-### Here are six frames and their corresponding heatmaps:
-
-![alt text][image5]
-
-### Here is the output of `scipy.ndimage.measurements.label()` on the integrated heatmap from all six frames:
-![alt text][image6]
-
-### Here the resulting bounding boxes are drawn onto the last frame in the series:
-![alt text][image7]
-
-
-
 ---
 
 ### Discussion
 
 #### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
 
-Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.  
+In this project I studied computer vision approach to solving vehicle detection problem. There are some advantages and disadvantages of current solution:
+
+* It is quite simple from conceptual point of view. This means that developer understands every single bit in the algorithm, whereas, for example, in deep learning approach, the algorithm is treated like a 'black box'. So it is behaviour is predictable.
+
+* It is very demanding to computational resources. Yes, it works in the project video, but the algorithm like this, to be used in real car, should solve the same problem in real-time. 
+* My SVM classifier can only detect cars and noncars. If there are more classes of objects to detect, the problem becomes harder and computational complexity increases. 
+
+There are different solutions based on deep learning, for example YOLA ([their website](https://pjreddie.com/darknet/yolo/), [git hub](https://github.com/pjreddie/darknet/wiki/YOLO:-Real-Time-Object-Detection) or [paper](https://arxiv.org/abs/1506.02640)).YOLA allows getting about 40-60 fps real-time and solving exactly the same problem, but not for cars only. Looks pretty impressive even in the case of high number of objects in the frame. I think this method can be a good alternative to the implemented one. 
 
