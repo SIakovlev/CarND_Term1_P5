@@ -17,6 +17,14 @@ The goals / steps of this project are the following:
 [image7]: ./report_images/car_nhog1.jpg
 [image8]: ./report_images/car_nhog2.jpg
 [image9]: ./report_images/car_nhog3.jpg
+[image10]: ./report_images/400_500_1.jpg
+[image11]: ./report_images/400_550_1_3.jpg
+[image12]: ./report_images/400_600_1_7.jpg
+[image13]: ./report_images/450_700_2_5.jpg
+[image14]: ./report_images/pipeline0.jpg
+[image15]: ./report_images/pipeline1.jpg
+[image16]: ./report_images/pipeline2.jpg
+[image17]: ./report_images/pipeline3.jpg
 
 [video1]: ./project_video_output.mp4
 
@@ -34,7 +42,7 @@ You're reading it!
 
 #### 1. Explain how (and identify where in your code) you extracted HOG features from the training images.
 
-The code for this step is contained in the first code cell of the IPython notebook (or in lines # through # of the file called `some_file.py`).  
+The code for this step is contained in the section called SVM Classifier of the IPython notebook (the function executing it is called `get_hog_features(...)` and located in the file `feature_extraction.py`).  
 
 I started by reading in all the `vehicle` and `non-vehicle` images.  Here is an example of one of each of the `vehicle` and `non-vehicle` classes:
 
@@ -64,21 +72,27 @@ I tried various combinations of parameters and...
 
 #### 3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
 
-I trained a Linear SVM classifier using HOG features only and got 98.9% on the test set, which I think should be enough for reliable car detection in a video stream.
+I trained a Linear SVM classifier using HOG features and color features and got 98.9% on the test set, which I think should be enough for reliable car detection in a video stream.
 
 ### Sliding Window Search
 
 #### 1. Describe how (and identify where in your code) you implemented a sliding window search.  How did you decide what scales to search and how much to overlap windows?
 
-I decided to search random window positions at random scales all over the image and came up with this (ok just kidding I didn't actually ;):
+I searched in the following four regions according to the perspective transform of the camera image:
 
-![alt text][image3]
+![alt text][image10]
+![alt text][image11]
+![alt text][image12]
+![alt text][image13]
 
 #### 2. Show some examples of test images to demonstrate how your pipeline is working.  What did you do to optimize the performance of your classifier?
 
 Ultimately I searched on two scales using YCrCb 3-channel HOG features plus spatially binned color and histograms of color in the feature vector, which provided a nice result.  Here are some example images:
 
-![alt text][image4]
+![alt text][image14]
+![alt text][image15]
+![alt text][image16]
+![alt text][image17]
 ---
 
 ### Video Implementation
