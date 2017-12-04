@@ -88,6 +88,7 @@ Because of the effect of perspective the car appears small near the middle of th
 #### 2. Show some examples of test images to demonstrate how your pipeline is working.  What did you do to optimize the performance of your classifier?
 
 Ultimately I searched on 4 different scales using YUV 3-channel HOG features plus spatially binned color and histograms of color in the feature vector, which provided a nice result. The images at each stage of working pipeline are provided in the next section. 
+
 ---
 
 ### Video Implementation
