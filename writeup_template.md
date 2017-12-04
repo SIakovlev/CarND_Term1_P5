@@ -79,11 +79,22 @@ I trained a Linear SVM classifier using HOG features and color features and got 
 
 #### 1. Describe how (and identify where in your code) you implemented a sliding window search.  How did you decide what scales to search and how much to overlap windows?
 
-Because of the effect of perspective the car appears small near the middle of the image and large near its edges. Therefore I searched in the following four regions trying to take this into account:
+Because of the effect of perspective the car appears small near the middle of the image and large near its edges. Therefore I searched in the following four regions trying to take this into account (function `pipeline(...)` lines #8 - #39).
+
+* `scale = 1`
 
 ![alt text][image10]
+
+* `scale = 1.3`
+
 ![alt text][image11]
+
+* `scale = 1.7`
+
 ![alt text][image12]
+
+* `scale = 2.5`
+
 ![alt text][image13]
 
 #### 2. Show some examples of test images to demonstrate how your pipeline is working.  What did you do to optimize the performance of your classifier?
