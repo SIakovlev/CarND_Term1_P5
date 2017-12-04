@@ -87,8 +87,7 @@ Because of the effect of perspective the car appears small near the middle of th
 
 #### 2. Show some examples of test images to demonstrate how your pipeline is working.  What did you do to optimize the performance of your classifier?
 
-Ultimately I searched on two scales using YUV 3-channel HOG features plus spatially binned color and histograms of color in the feature vector, which provided a nice result. Here are some images that show how the pipeline works:
-
+Ultimately I searched on 4 different scales using YUV 3-channel HOG features plus spatially binned color and histograms of color in the feature vector, which provided a nice result. The images at each stage of working pipeline are provided in the next section. 
 ---
 
 ### Video Implementation
@@ -118,8 +117,9 @@ In this project I studied computer vision approach to solving vehicle detection 
 
 * It is quite simple from conceptual point of view. This means that developer understands every single bit in the algorithm, whereas, for example, in deep learning approach, the algorithm is treated like a 'black box'. So it is behaviour is predictable.
 
-* It is very demanding to computational resources. Yes, it works in the project video, but the algorithm like this, to be used in real car, should solve the same problem in real-time. 
-* My SVM classifier can only detect cars and noncars. If there are more classes of objects to detect, the problem becomes harder and computational complexity increases. 
+* It is very demanding to computational resources. Yes, it works in the project video, but the algorithm like this should solve the same problem in real-time if we want to use it in real car,
+
+* My SVM classifier can only detect cars and not cars. If there are more classes of objects to detect, the problem becomes harder and computational complexity increases. However improving a classifier (increasing the size of datased, use a different type, i.e. neural network) is one of the ways to make this approach more robust. 
 
 There are different solutions based on deep learning, for example YOLA ([their website](https://pjreddie.com/darknet/yolo/), [git hub](https://github.com/pjreddie/darknet/wiki/YOLO:-Real-Time-Object-Detection) or [paper](https://arxiv.org/abs/1506.02640)).YOLA allows getting about 40-60 fps real-time and solving exactly the same problem, but not for cars only. Looks pretty impressive even in the case of high number of objects in the frame. I think this method can be a good alternative to the implemented one. 
 
