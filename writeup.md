@@ -61,7 +61,7 @@ The configuration above did reasonably well for classification, so I have decide
 
 #### 3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
 
-I trained a Linear SVM classifier using HOG features and color features and got 99.6% on the test set (section "SVM Classifier" in the Jupyter Notebook file), which was enough for reliable car detection in a video stream. The disadvantage though is the computational complexity, i.e. in order to classify if the image belongs to one of two classes, the classifier should analyse its histogram, pixels and hog features.  
+I trained a Linear SVM classifier using HOG and color (spatially binned color and histograms of color) features and got 99.6% on the test set (section "SVM Classifier" in the Jupyter Notebook file), which was enough for reliable car detection in a video stream. The disadvantage though is the computational complexity, i.e. in order to classify if the image belongs to one of two classes, the classifier should analyse its histogram, pixels and hog features.  
 
 ### Sliding Window Search
 
