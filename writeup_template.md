@@ -11,12 +11,8 @@ The goals / steps of this project are the following:
 [image1]: ./report_images/car_notcar.jpg
 [image2]: ./report_images/car_hog0.jpg
 [image3]: ./report_images/car_hog1.jpg
-[image4]: ./report_images/car_hog2.jpg
-[image5]: ./report_images/car_hog3.jpg
 [image6]: ./report_images/car_nhog0.jpg
 [image7]: ./report_images/car_nhog1.jpg
-[image8]: ./report_images/car_nhog2.jpg
-[image9]: ./report_images/car_nhog3.jpg
 [image10]: ./report_images/400_500_1.jpg
 [image11]: ./report_images/400_550_1_3.jpg
 [image12]: ./report_images/400_600_1_7.jpg
@@ -54,15 +50,11 @@ Here is an example using the `YUV` color space and HOG parameters of `orientatio
 
 ![alt text][image2]
 ![alt text][image3]
-![alt text][image4]
-![alt text][image5]
 
 The same for a non-car image:
 
 ![alt text][image6]
 ![alt text][image7]
-![alt text][image8]
-![alt text][image9]
 
 #### 2. Explain how you settled on your final choice of HOG parameters.
 
